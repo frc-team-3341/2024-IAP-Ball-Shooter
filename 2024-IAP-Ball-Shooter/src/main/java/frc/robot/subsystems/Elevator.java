@@ -34,9 +34,6 @@ public class Elevator extends SubsystemBase {
   }
 
 
-
-   
-
   public void ElevatorDown(){
     if(joystick.getY() < -0.1) {
        motorE.set(-0.5);
@@ -45,10 +42,10 @@ public class Elevator extends SubsystemBase {
   // Called when the command is initially scheduled.
   @Override
   public void periodic(){
-    if(motorE.getSensorCollection().isFwdLimitSwitchClosed()){
+    if(motorE.getSensorCollection().isFwdLimitSwitchClosed()== true){
         motorE.set(0);
     }
-    if(motorE.getSensorCollection().isRevLimitSwitchClosed()){
+    if(motorE.getSensorCollection().isRevLimitSwitchClosed()== true){
         motorE.set(0);
     }
 
