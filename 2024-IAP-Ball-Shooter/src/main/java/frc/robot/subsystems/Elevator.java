@@ -23,12 +23,13 @@ public class Elevator extends SubsystemBase {
   
   }
   public void ElevatorUp(){
-    if (joystick.getRawButtonPressed(0)) {
-
+    if(RobotContainer.getJoy().getRawButtonPressed(3)){
+        setPoint = 0;
+  
    }
   }
-  public void Elevator(){
-    if (joystick.getRawButtonPressed(0)) {
+  public void ElevatorDown(){
+    if (RobotContainer.getJoy().getRawButtonPressed(4)) {
       
    }
   }
@@ -41,7 +42,7 @@ public class Elevator extends SubsystemBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double yValue = joystick.getY()
+    double yValue = joystick.getY();
  
   }
 
