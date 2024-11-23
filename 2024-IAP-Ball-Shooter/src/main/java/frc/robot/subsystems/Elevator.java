@@ -24,7 +24,7 @@ public class Elevator extends SubsystemBase {
   }
   public void ElevatorUp(){
     if(RobotContainer.getJoy().getRawButtonPressed(3)){
-        setPoint = 0;
+     
   
    }
   }
