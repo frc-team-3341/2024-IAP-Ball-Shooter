@@ -48,12 +48,13 @@ public class Elevator extends SubsystemBase {
     if(motorE.getSensorCollection().isRevLimitSwitchClosed()== true){
         motorE.set(0);
     }
+    double val = joystick.getY();
     if(joystick.getY() > 0.1 ){
         motorE.set(0.5);
   
    }
     if(joystick.getY() < -0.1 ){
-        motorE.set(0.5);
+        motorE.set(-0.5);
   
    }
 
