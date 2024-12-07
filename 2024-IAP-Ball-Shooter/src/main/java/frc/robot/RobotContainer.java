@@ -12,10 +12,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.BallShooter;
 import frc.robot.subsystems.BeamBreak;
-
+import frc.robot.subsystems.Elevator;
 public class RobotContainer {
   public BeamBreak beambreak = new BeamBreak();
-  private final BallShooter shooter = new BallShooter();
+  private final Elevator elevator = new Elevator(joy);
+  //private final BallShooter shooter = new BallShooter();
   private final static Joystick joy = new Joystick(0);
   public RobotContainer() {
     configureBindings();
