@@ -1,68 +1,44 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.Elevator;
-import frc.robot.RobotContainer;
 import frc.robot.Constants;
-
-
 
 public class Elevator extends SubsystemBase {
 
-  public final WPI_TalonSRX motorE = new WPI_TalonSRX(Constants.ElevatorPorts.ElevatorPort);
-    Joystick joystick;
+  private final WPI_TalonSRX motorE = new WPI_TalonSRX(Constants.ElevatorPorts.ElevatorPort);
+  private static final int CPR = 4096; 
+  private static final double circ = 3.14; 
 
+  public Elevator() {
+    motorE.configFactoryDefault();
+    motorE.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    motorE.setSensorPhase(true); 
+    motorE.setSelectedSensorPosition(0);
 
-  /** Creates a new ClimbTeleop. */
-  public Elevator(Joystick joystick) {
-    this.joystick = joystick;
   }
 
-
-
-  public void ElevatorUp(){
-    if(joystick.getY() > 0.1 ){
-        motorE.set(0.5);
-  
-   }
+  public void setElevatorPosition(double targetPosition) {
+    motorE.set(ControlMode.Position, targetPosition*CPR / circ);
   }
 
+  public double getElevatorPosition() {
+    return (motorE.getSelectedSensorPosition()/CPR)*circ;
 
-  public void ElevatorDown(){
-    if(joystick.getY() < -0.1) {
-       motorE.set(-0.5);
-   }
   }
-  // Called when the command is initially scheduled.
+
+  public void stopElevator() {
+    motorE.set(ControlMode.PercentOutput, 0);
+  }
+
   @Override
-  public void periodic(){
-    if(motorE.getSensorCollection().isFwdLimitSwitchClosed()== true){
-        motorE.set(0);
-    }
-    if(motorE.getSensorCollection().isRevLimitSwitchClosed()== true){
-        motorE.set(0);
-    }
-    double val = joystick.getY();
-    if(joystick.getY() > 0.1 ){
-        motorE.set(0.5);
-  
-   }
-    if(joystick.getY() < -0.1 ){
-        motorE.set(-0.5);
-  
-   }
-
-
-    if(joystick.getRawButtonPressed(0)) {
-         motorE.set(0);
+  public void periodic() {
+    // Display encoder data
+    SmartDashboard.putNumber("Elevator Encoder Position(inch)", getElevatorPosition());
+    SmartDashboard.putBoolean("Forward Limit", motorE.getSensorCollection().isFwdLimitSwitchClosed());
+    SmartDashboard.putBoolean("Reverse Limit", motorE.getSensorCollection().isRevLimitSwitchClosed());
   }
-  SmartDashboard.putBoolean("Forward limit switch value", motorE.getSensorCollection().isFwdLimitSwitchClosed());
-  SmartDashboard.putBoolean("Reverse limit switch value", motorE.getSensorCollection().isRevLimitSwitchClosed());   
-    }
 }

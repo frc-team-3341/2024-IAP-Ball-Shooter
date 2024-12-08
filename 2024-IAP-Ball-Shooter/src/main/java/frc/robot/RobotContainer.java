@@ -13,9 +13,10 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.BallShooter;
 import frc.robot.subsystems.BeamBreak;
 import frc.robot.subsystems.Elevator;
+import frc.robot.commands.ec;
 public class RobotContainer {
   public BeamBreak beambreak = new BeamBreak();
-  private final Elevator elevator = new Elevator(joy);
+  private final Elevator elevator = new Elevator();
   //private final BallShooter shooter = new BallShooter();
   private final static Joystick joy = new Joystick(0);
   public RobotContainer() {
@@ -31,6 +32,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    return new ec(elevator, 6);
   }
 }

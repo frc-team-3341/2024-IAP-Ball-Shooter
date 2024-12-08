@@ -69,6 +69,7 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'edu.wpi.first.ntcore:ntcore-java:2024.+'
 }
 
 test {
