@@ -10,7 +10,7 @@ public class Constants {
     public static final class BallHandlerPorts {
         public static final int beamBreakPort = 1;
         public static final int flywheelPort = 4;
-        public static final int FeedwheelPort = 3;
+        public static final int FeedwheelPort = 0;
     }
 
     public static final class leftFlywheelPIDConsts {
@@ -19,6 +19,11 @@ public class Constants {
         public static double pidD = 0;
     }
 
+    public static final class ElevatorPorts {
+        public static final int ElevatorPort = 3;
+        public static final int TopLimitswitchPort = 1;
+        public static final int BottomLimitswitchPort = 5;
+    }
     public static final class pivotPIDConsts {
         public static final double pidP = 0.05;
         public static final double pidI = 0;

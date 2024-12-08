@@ -1,6 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
 
@@ -12,10 +9,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.BallShooter;
 import frc.robot.subsystems.BeamBreak;
-
+import frc.robot.subsystems.Elevator;
+import frc.robot.commands.Height; 
 public class RobotContainer {
   public BeamBreak beambreak = new BeamBreak();
-  private final BallShooter shooter = new BallShooter();
+  private final Elevator elevator = new Elevator(joy);
+  //private final BallShooter shooter = new BallShooter();
   private final static Joystick joy = new Joystick(0);
   public RobotContainer() {
     configureBindings();
@@ -30,6 +29,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    return new Height(4);
   }
 }
