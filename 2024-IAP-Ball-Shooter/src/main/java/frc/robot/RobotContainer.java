@@ -22,6 +22,7 @@ public class RobotContainer {
     configureBindings();
     DataLogManager.start();
     DriverStation.startDataLog(DataLogManager.getLog());
+    
   }
 
   private void configureBindings() {}

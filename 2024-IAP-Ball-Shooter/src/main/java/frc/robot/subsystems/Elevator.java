@@ -13,32 +13,52 @@ import frc.robot.Constants;
 
 
 
+
 public class Elevator extends SubsystemBase {
 
   public final WPI_TalonSRX motorE = new WPI_TalonSRX(Constants.ElevatorPorts.ElevatorPort);
     Joystick joystick;
-
-
+    double maxHeight = 52;
+    double RPI = 20;
+    double max = (maxHeight/RPI)*4096;
+    double currentPos = motorE.getSelectedSensorPosition(0);
   /** Creates a new ClimbTeleop. */
   public Elevator(Joystick joystick) {
     this.joystick = joystick;
   }
-
-
-
+  /* 
+  public void topLimit(){
+    if(currentPos==max){
+    motorE.set(0);
+    }
+  }
+  */
+/* 
   public void ElevatorUp(){
     if(joystick.getY() > 0.1 ){
         motorE.set(0.5);
   
    }
   }
-
-
+  
+  public void resetEncoders(){
+    motorE.setSelectedSensorPosition(0,0,10);
+  }
+ 
   public void ElevatorDown(){
     if(joystick.getY() < -0.1) {
        motorE.set(-0.5);
    }
   }
+*/
+  //resets encoders
+  public void initialize(){
+      motorE.setSelectedSensorPosition(0,0,10);
+    }
+  
+  
+  
+  
   // Called when the command is initially scheduled.
   @Override
   public void periodic(){
@@ -48,7 +68,7 @@ public class Elevator extends SubsystemBase {
     if(motorE.getSensorCollection().isRevLimitSwitchClosed()== true){
         motorE.set(0);
     }
-    double val = joystick.getY();
+    //double value = joystick.getY();
     if(joystick.getY() > 0.1 ){
         motorE.set(0.5);
   
@@ -57,11 +77,16 @@ public class Elevator extends SubsystemBase {
         motorE.set(-0.5);
   
    }
+   //top soft limit
+    if(currentPos >= max){
+      motorE.set(0);
+    }
 
 
     if(joystick.getRawButtonPressed(0)) {
          motorE.set(0);
   }
+  SmartDashboard.putNumber("Current position in ticks",motorE.getSelectedSensorPosition(0));
   SmartDashboard.putBoolean("Forward limit switch value", motorE.getSensorCollection().isFwdLimitSwitchClosed());
   SmartDashboard.putBoolean("Reverse limit switch value", motorE.getSensorCollection().isRevLimitSwitchClosed());   
     }
