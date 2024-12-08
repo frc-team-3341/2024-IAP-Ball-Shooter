@@ -18,7 +18,7 @@ public class BeamBreak extends SubsystemBase {
   double seconds;
   double distance = 18.0;
   DigitalInput beamBreak = new DigitalInput(Constants.BallHandlerPorts.beamBreakPort);
-  // DigitalInput beamBreak2 = new DigitalInput(Constants.BeamBreak.beamID2);
+  DigitalInput beamBreak2 = new DigitalInput(Constants.BallHandlerPorts.beamBreakPort);
 
   public BeamBreak() {
   }
@@ -26,13 +26,14 @@ public class BeamBreak extends SubsystemBase {
   public boolean getSensor(){
     return !beamBreak.get();
   }
-  // public boolean getSecondSensor(){
-  //   return !beamBreak2.get();
-  // }
+  public boolean getSecondSensor(){
+    return !beamBreak2.get();
+  }
+
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+
     if(getSensor() && !timerStarted){
       timer.reset();
       timer.start();
@@ -45,17 +46,19 @@ public class BeamBreak extends SubsystemBase {
       seconds = timer.get();
     }
 
-    // if(getSecondSensor()){
-    //   if(timer.get() > 0){
-    //     seconds = timer.get();
-    //   }
-      // timer.stop();
-      // timer.reset();
+    if(getSecondSensor()){
+      if(timer.get() > 0){
+        seconds = timer.get();
+      }
+      timer.stop();
+      timer.reset();
 
     SmartDashboard.putBoolean("beamBreak1", getSensor());
-    // SmartDashboard.putBoolean("beamBreak2", getSecondSensor());
+    SmartDashboard.putBoolean("beamBreak2", getSecondSensor());
     SmartDashboard.putNumber("seconds", seconds);
     SmartDashboard.putNumber("timer", timer.get());
     SmartDashboard.putNumber("velocity", distance/seconds/100.0);
+    
+    }
   }
 }
