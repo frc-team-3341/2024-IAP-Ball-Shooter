@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class BeamBreak extends SubsystemBase {
-  /** Creates a new beamBreak. */
 
   boolean timerStarted = false; 
   Timer timer = new Timer();
