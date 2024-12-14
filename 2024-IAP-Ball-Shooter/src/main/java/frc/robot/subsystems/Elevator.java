@@ -21,6 +21,7 @@ public class Elevator extends SubsystemBase {
     double maxHeight = 52;
     double RPI = 20;
     double max = (maxHeight/RPI)*4096;
+    double min = -100000;
     double currentPos = motorE.getSelectedSensorPosition(0);
   /** Creates a new ClimbTeleop. */
   public Elevator(Joystick joystick) {
@@ -68,6 +69,7 @@ public class Elevator extends SubsystemBase {
     if(motorE.getSensorCollection().isRevLimitSwitchClosed()== true){
         motorE.set(0);
     }
+    /**
     //double value = joystick.getY();
     if(joystick.getY() > 0.1 ){
         motorE.set(0.5);
@@ -81,12 +83,21 @@ public class Elevator extends SubsystemBase {
     if(currentPos >= max){
       motorE.set(0);
     }
-
+    */
+    currentPos = motorE.getSelectedSensorPosition(0);
+    double input = joystick.getY();
+    
+    if(currentPos < max && input <=  0 ||
+    currentPos > min && input > 0){
+      motorE.set(input * .6);
+    }
+    
+    
 
     if(joystick.getRawButtonPressed(0)) {
          motorE.set(0);
   }
-  SmartDashboard.putNumber("Current position in ticks",motorE.getSelectedSensorPosition(0));
+  SmartDashboard.putNumber("Current position in ticks",currentPos);
   SmartDashboard.putBoolean("Forward limit switch value", motorE.getSensorCollection().isFwdLimitSwitchClosed());
   SmartDashboard.putBoolean("Reverse limit switch value", motorE.getSensorCollection().isRevLimitSwitchClosed());   
     }
