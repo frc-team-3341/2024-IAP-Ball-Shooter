@@ -17,7 +17,7 @@ public class BeamBreak extends SubsystemBase {
   double seconds;
   double distance = 18.0;
   DigitalInput beamBreak = new DigitalInput(Constants.BallHandlerPorts.beamBreakPort);
-  DigitalInput beamBreak2 = new DigitalInput(Constants.BallHandlerPorts.beamBreakPort);
+  DigitalInput beamBreak2 = new DigitalInput(Constants.BallHandlerPorts.beamBreakPort2);
 
   public BeamBreak() {
   }
@@ -52,9 +52,9 @@ public class BeamBreak extends SubsystemBase {
       timer.stop();
       timer.reset();
 
-    SmartDashboard.putBoolean("beamBreak1", getSensor());
-    SmartDashboard.putBoolean("beamBreak2", getSecondSensor());
-    SmartDashboard.putNumber("seconds", seconds);
+    SmartDashboard.putBoolean("beamBreak 1", getSensor());
+    SmartDashboard.putBoolean("beamBreak 2", getSecondSensor());
+    SmartDashboard.putNumber("seconds between sensors", seconds);
     SmartDashboard.putNumber("timer", timer.get());
     SmartDashboard.putNumber("velocity", distance/seconds/100.0);
     

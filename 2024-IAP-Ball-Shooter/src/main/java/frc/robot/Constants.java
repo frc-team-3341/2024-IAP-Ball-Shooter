@@ -8,7 +8,8 @@ public class Constants {
     public static final int circumference = 0;
 
     public static final class BallHandlerPorts {
-        public static final int beamBreakPort = 1;
+        public static final int beamBreakPort = 2;
+        public static final int beamBreakPort2 = 3;
         public static final int flywheelPort = 4;
         public static final int FeedwheelPort = 0;
     }
