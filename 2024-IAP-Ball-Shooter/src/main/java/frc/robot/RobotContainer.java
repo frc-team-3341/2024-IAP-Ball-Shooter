@@ -18,7 +18,7 @@ public class RobotContainer {
   public BeamBreak beambreak2 = new BeamBreak();
 
   private final Elevator elevator = new Elevator(joy);
-  //private final BallShooter shooter = new BallShooter();
+  private final BallShooter shooter = new BallShooter();
   private final static Joystick joy = new Joystick(0);
   public RobotContainer() {
     configureBindings();
