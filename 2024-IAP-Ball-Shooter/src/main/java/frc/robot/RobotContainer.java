@@ -30,6 +30,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new Height(2);
+    Height myHeight = new Height(2, elevator);
+    return myHeight;
   }
 }
