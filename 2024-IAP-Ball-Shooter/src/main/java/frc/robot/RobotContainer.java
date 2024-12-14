@@ -1,4 +1,3 @@
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DataLogManager;
@@ -14,7 +13,9 @@ import frc.robot.commands.Height;
 public class RobotContainer {
   public BeamBreak beambreak = new BeamBreak();
   private final Elevator elevator = new Elevator(joy);
-  //private final BallShooter shooter = new BallShooter();
+  
+  private final BallShooter shooter = new BallShooter();
+
   private final static Joystick joy = new Joystick(0);
   public RobotContainer() {
     configureBindings();
@@ -29,6 +30,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new Height(4);
+    return new Height(2);
   }
 }
