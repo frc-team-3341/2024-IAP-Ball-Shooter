@@ -17,22 +17,28 @@ public class ec extends CommandBase {
 
   @Override
   public void initialize() {
-    // le set fr
-    elevator.setElevatorPosition(targetPosition);
+    System.out.println("Initializing EC Command...");
+    System.out.println("Target Position: " + targetPosition);
+    elevator.move(0);
+
   }
 
   @Override
   public void execute() {
-    // Data-ey DO THE LOGGING SMH RAHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+    elevator.move(1);
+
     double currentPosition = elevator.getElevatorPosition();
+  
     System.out.println("Current Encoder Position: " + currentPosition);
+    System.out.println("Error: " + (targetPosition - currentPosition));
   }
 
   @Override
   public boolean isFinished() {
-    // you in toly f*ker
-    double currentPosition = elevator.getElevatorPosition();
-    return Math.abs(targetPosition - currentPosition) <= tolerance;
+    if (elevator.getElevatorPosition() >= targetPosition){
+      return true;
+    }
+    return false;
   }
 
   @Override
@@ -43,5 +49,6 @@ public class ec extends CommandBase {
     } else {
       System.out.println("Elevator reached target position: " + elevator.getElevatorPosition());
     }
+    System.out.println("EC Command ended.");
   }
 }
